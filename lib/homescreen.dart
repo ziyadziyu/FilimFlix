@@ -72,7 +72,7 @@ class _HomescreenState extends State<Homescreen> {
             final Tvepisode = snapshot.data;
             return ListTile(
               leading: Icon(Icons.tv),
-              title: Text("Tv Episodes",style: TextStyle(fontSize: 20),),
+              title: Text("Tv Episohhhhhhdes",style: TextStyle(fontSize: 20),),
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) =>Tv(TvEpisode: Tvepisode) ,));
               },
