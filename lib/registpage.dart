@@ -52,7 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 50,
                 ),
                 Text(
-                  "Let's create an ccount for you",
+                  "Let's createssss an ccount for you",
                   style: GoogleFonts.dmSerifDisplay(
                       color: Colors.black87, fontSize: 16),
                 ),
