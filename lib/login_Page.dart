@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movieapp/components/my_button.dart';
 import 'package:movieapp/components/sqaure%20tile.dart';
 import 'package:movieapp/components/text_feild.dart';
+import 'package:movieapp/homescreen.dart';
 
 
 class Loginpage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _LoginpageState extends State<Loginpage> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
 
-      Navigator.pop(context);
+  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Homescreen(),));
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
 // show error message

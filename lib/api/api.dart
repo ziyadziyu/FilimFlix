@@ -66,7 +66,7 @@ class Api {
     print(response.statusCode);
     if (response.statusCode == 200) {
       final decodedData = jsonDecode(response.body)["results"] as List;
-      // print(decodedData);
+      print(decodedData);
       return decodedData.map((movie) => Movie.fromJson(movie)).toList();
     } else {
       throw Exception("Something happend");
