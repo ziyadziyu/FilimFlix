@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:movieapp/homescreen.dart';
 import 'package:movieapp/login_Page.dart';
 
+import 'loginorregisterpage.dart';
+
 class Authpage extends StatelessWidget {
   const Authpage({super.key});
 
@@ -18,7 +20,7 @@ class Authpage extends StatelessWidget {
           }
       // user is not logeed in
           else {
-            return Loginpage();
+            return LoginorRegisterPage();
           }
         },
       ),

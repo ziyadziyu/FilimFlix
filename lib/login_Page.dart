@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movieapp/components/my_button.dart';
 import 'package:movieapp/components/sqaure%20tile.dart';
 import 'package:movieapp/components/text_feild.dart';
-import 'package:movieapp/homescreen.dart';
-import 'package:movieapp/registpage.dart';
+
 
 class Loginpage extends StatefulWidget {
-  Loginpage({super.key});
+  final Function()? onTap;
+  const Loginpage({super.key, this.onTap});
 
   @override
   State<Loginpage> createState() => _LoginpageState();
@@ -20,34 +20,40 @@ class _LoginpageState extends State<Loginpage> {
 
   void SignInUserIn() async {
 // show loading circle
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-      Snack("sucess");
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Homescreen(),));
+
+      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      //pop the loading ciricle
-      //wrong email
-   Snack("Please enter your email and password");
-   print(e);
-   print(e.code);
-   if(e.code == "invalid email"){
-     Snack("EMail Naot");
-   }else if(e.code == "Invalid"){
-     print(e.code);
-     Snack("PAswword");
-   }
-      }
+      Navigator.pop(context);
+// show error message
+      ShowErrorMessage(e.code);
+    }
 
 //pop loading ciricle
   }
 
   //wrongemail message popup
-
-
-  Snack(data){
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(data),));
+  void ShowErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+            title: Text(message),
+            backgroundColor: Colors.red,
+            icon: Icon((Icons.error_outline)));
+      },
+    );
   }
+
   //wrongPassword popup
 
   @override
@@ -112,6 +118,7 @@ class _LoginpageState extends State<Loginpage> {
                       height: 25,
                     ),
                     Mybutton(
+                      text: "Sign In",
                       onTap: SignInUserIn,
                     ),
                     SizedBox(
@@ -171,20 +178,14 @@ class _LoginpageState extends State<Loginpage> {
                         SizedBox(
                           width: 6,
                         ),
-                        TextButton(
-                            child: Text(
-                              "Register Now",
-                              style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => RegisterPage(),
-                                  ));
-                            })
+                        GestureDetector(
+                          onTap:widget.onTap,
+                          child: Text(
+                            "Register Now",
+                            style: TextStyle(
+                                color: Colors.blue, fontWeight: FontWeight.bold),
+                          ),
+                        )
                       ],
                     )
                   ]),
